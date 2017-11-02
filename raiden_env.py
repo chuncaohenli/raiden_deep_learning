@@ -169,7 +169,6 @@ class Player(pygame.sprite.Sprite):
         if action[7] == 1:
             self.moveY(5)
             self.moveX(5)
-        print(self.rect)
 
 
 class HitBox(pygame.sprite.Sprite):
@@ -346,7 +345,7 @@ class en_Bullet(pygame.sprite.Sprite):
     def __init__(self, x, y, angle):
         pygame.sprite.Sprite.__init__(self)
         self.angle = -math.radians(angle - 135)
-        self.image = pygame.image.load(root + "bullet3.png").convert_alpha()
+        self.image = pygame.image.load(os.path.join(root, "bullet3.png")).convert_alpha()
         self.rect = self.image.get_rect()
         self.move = [x, y]
         self.speed_magnitude = 5
@@ -417,7 +416,7 @@ class Raiden_Env():
     # --- Enemy with Z shape path
     def enemytype3(self):
         global allSprites, enemy3_group, time, bgtime
-        if time % 30 == 0 and 1 < time % 300 < 200:
+        if time % 10 == 0 and 1 < time % 300 < 250:
             enemy3 = Enemy()
             enemy3.image = pygame.image.load(os.path.join(root, "z-01.png")).convert_alpha()
             enemy3.hp = 4
@@ -444,18 +443,18 @@ class Raiden_Env():
             hitbox, enemytest_group, enemy1_group, enemy2_group, \
             enemy3_group, enemy4_group, enemy5_group, enemy6_group, \
             enemyt_group, boss_group, myfont, instrucfont, hitbox_group
-        if time % 100 == 0:
+        if time % 50 == 0:
             enemy1 = Enemy()
-            enemy1.image = pygame.image.load(root + "a-03.png").convert_alpha()
+            enemy1.image = pygame.image.load(os.path.join(root, "a-03.png")).convert_alpha()
             enemy1.hp = 4
             enemy1.turn = 3.1415926535898 * 25
             enemy1.rect.x = 550
             enemy1.rect.y = 900
             allSprites.add(enemy1)
             enemy1_group.add(enemy1)
-        if (time + 50) % 100 == 0:
+        if (time + 25) % 50 == 0:
             enemy4 = Enemy()
-            enemy4.image = pygame.image.load(root + "a-04.png").convert_alpha()
+            enemy4.image = pygame.image.load(os.path.join(root, "a-04.png")).convert_alpha()
             enemy4.hp = 4
             enemy4.rect.x = 150
             enemy4.rect.y = 900
@@ -470,9 +469,9 @@ class Raiden_Env():
             enemy3_group, enemy4_group, enemy5_group, enemy6_group, \
             enemyt_group, boss_group, myfont, instrucfont, hitbox_group, enemy2
 
-        if time % 30 == 0 and 0 < time % 300 < 200:
+        if time % 10 == 0 and 0 < time % 300 < 250:
             enemy2 = Enemy()
-            enemy2.image = pygame.image.load(root + "s-01.png").convert_alpha()
+            enemy2.image = pygame.image.load(os.path.join(root, "s-01.png")).convert_alpha()
             enemy2.hp = 1
             enemy2.crash_dmg = 40
             enemy2.y_offset = -5
@@ -489,18 +488,18 @@ class Raiden_Env():
             enemy3_group, enemy4_group, enemy5_group, enemy6_group, \
             enemyt_group, boss_group, myfont, instrucfont, hitbox_group
 
-        if time % 50 == 0 and 1 < time % 500 < 220:
+        if time % 40 == 0 and 1 < time % 500 < 450:
             enemy5 = Enemy()
-            enemy5.image = pygame.image.load(root + "a-01.png").convert_alpha()
+            enemy5.image = pygame.image.load(os.path.join(root, "a-01.png")).convert_alpha()
             enemy5.hp = 4
             enemy5.rect.x = -20
             enemy5.rect.y = 150
             enemy5.turn = 3.1415926535898 * 75
             allSprites.add(enemy5)
             enemy5_group.add(enemy5)
-        if (time + 25) % 50 == 0 and 1 < time % 500 < 220:
+        if (time + 20) % 40 == 0 and 1 < time % 500 < 450:
             enemy6 = Enemy()
-            enemy6.image = pygame.image.load(root + "a-02.png").convert_alpha()
+            enemy6.image = pygame.image.load(os.path.join(root, "a-02.png")).convert_alpha()
             enemy6.hp = 4
             enemy6.rect.x = 720
             enemy6.rect.y = 150
@@ -514,18 +513,18 @@ class Raiden_Env():
             hitbox, enemytest_group, enemy1_group, enemy2_group, \
             enemy3_group, enemy4_group, enemy5_group, enemy6_group, \
             enemyt_group, boss_group, myfont, instrucfont, hitbox_group
-        if time % 30 == 0 and 1 < time % 600 < 200:
+        if time % 30 == 0 and 1 < time % 600 < 500:
             enemy5 = Enemy()
-            enemy5.image = pygame.image.load(root + "a-01.png").convert_alpha()
+            enemy5.image = pygame.image.load(os.path.join(root, "a-01.png")).convert_alpha()
             enemy5.hp = 4
             enemy5.rect.x = -20
             enemy5.rect.y = 150
             enemy5.turn = 3.1415926535898 * 75
             allSprites.add(enemy5)
             enemy5_group.add(enemy5)
-        if time % 30 == 0 and 200 < time % 600 < 400:
+        if time % 30 == 0 and 200 < time % 600 < 500:
             enemy6 = Enemy()
-            enemy6.image = pygame.image.load(root + "a-02.png").convert_alpha()
+            enemy6.image = pygame.image.load(os.path.join(root, "a-02.png")).convert_alpha()
             enemy6.hp = 4
             enemy6.rect.x = 720
             enemy6.rect.y = 150
@@ -543,7 +542,7 @@ class Raiden_Env():
             enemyt_group, boss_group, myfont, instrucfont, hitbox_group
         if time % 300 == 0:
             enemyt = Enemy()
-            enemyt.image = pygame.image.load(root + "t-01.png").convert_alpha()
+            enemyt.image = pygame.image.load(os.path.join(root, "t-01.png")).convert_alpha()
             enemyt.hp = 10
             enemyt.crash_dmg = 50
             enemyt.score = 50
@@ -565,7 +564,7 @@ class Raiden_Env():
         boss1.crash_dmg = 100
         boss1.rect.x = 350
         boss1.rect.y = 100
-        boss1.image = pygame.image.load(root + "boss1.png").convert_alpha()
+        boss1.image = pygame.image.load(os.path.join(root, "boss1.png")).convert_alpha()
         boss1.rect = boss1.image.get_rect()
         allSprites.add(boss1)
         boss_group.add(boss1)
@@ -812,10 +811,13 @@ class Raiden_Env():
         allSprites.draw(screen)
 
         # --- Go ahead and update the screen with what we've drawn.
-        pygame.display.flip()
+        #pygame.display.flip()
         # --- Limit to 60 frames per second
         clock.tick(SPEED)
         # return screenshot, reward, terminated_signal
+        # add reward for live
+        if time % 4 == 0 and not game_end:
+            player.score += 0.1
         return pygame.surfarray.array3d(pygame.display.get_surface()), \
                player.score/100.0, \
                game_end, \
