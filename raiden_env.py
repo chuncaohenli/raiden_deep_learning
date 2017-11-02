@@ -3,7 +3,7 @@ import random
 import math
 import numpy as np
 import os
-os.environ["SDL_VIDEODRIVER"] = "x11"
+# os.environ["SDL_VIDEODRIVER"] = "x11"
 # Global var
 SPEED = 60
 root = r'resource'
@@ -578,6 +578,7 @@ class Raiden_Env():
             enemyt_group, boss_group, myfont, instrucfont, hitbox_group, SPEED
         # --- End screen with game reset
         # screen.fill(BLACK)
+        old_score = player.score
         pygame.display.flip()
 
         # --- Main event loop
@@ -666,29 +667,37 @@ class Raiden_Env():
 
         for hitbox in enemy1_hit_player:
             player.hp -= enemy.crash_dmg
+            player.score -= enemy.crash_dmg
 
         for hitbox in enemy2_hit_player:
             # player.hp -= enemy2.crash_dmg
-            player.hp -= enemy.crash_dmg
+            player.hp -= enemy.crash_dmg * 2
+            player.score -= enemy.crash_dmg
 
         for hitbox in enemy3_hit_player:
             player.hp -= enemy.crash_dmg
+            player.score -= enemy.crash_dmg
 
         for hitbox in enemy4_hit_player:
             player.hp -= enemy.crash_dmg
+            player.score -= enemy.crash_dmg
 
         for hitbox in enemy5_hit_player:
             player.hp -= enemy.crash_dmg
+            player.score -= enemy.crash_dmg
 
         for hitbox in enemy6_hit_player:
             player.hp -= enemy.crash_dmg
+            player.score -= enemy.crash_dmg
 
         for hitbox in boss_hit_player:
             player.hp -= boss.crash_dmg
+            player.score -= boss.crash_dmg
 
         for hitbox in enemyt_hit_player:
             # player.hp -= enemyt.crash_dmg
             player.hp -= enemy.crash_dmg
+            player.score -= enemy.crash_dmg
         # --- Player's bullet enemy collision
         bullet_hit_enemy1 = pygame.sprite.groupcollide(enemy1_group, p_bullet_group, False, True)
         bullet_hit_enemy2 = pygame.sprite.groupcollide(enemy2_group, p_bullet_group, False, True)
@@ -786,11 +795,13 @@ class Raiden_Env():
         if player.hp <= 0:
             player.live -= 1
             player.hp = 100
-            player.score -= 200
+            # player.score -= 200
         ##        bullet.gap = 16
 
         if player.live <= 0:
             game_end = True
+            player.live = 3
+            player.hp = 100
 
         # --- Blit screens
         # p_score = instrucfont.render('Score:' + str(player.score), 1, N_BLUE)
@@ -816,11 +827,15 @@ class Raiden_Env():
         clock.tick(SPEED)
         # return screenshot, reward, terminated_signal
         # add reward for live
-        if time % 4 == 0 and not game_end:
-            player.score += 0.1
+        reward = player.score - old_score
+        if not game_end:
+            reward += 0.1
+        # if game_end:
+        #     reward -= 100
         return pygame.surfarray.array3d(pygame.display.get_surface()), \
-               player.score/100.0, \
+               reward/100.0, \
                game_end, \
+               player.score, \
                player.hp, \
                player.live
 

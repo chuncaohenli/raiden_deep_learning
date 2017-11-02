@@ -19,22 +19,24 @@ from keras.layers.convolutional import Convolution2D, MaxPooling2D
 from keras.optimizers import SGD, Adam
 import tensorflow as tf
 from raiden_env import *
+import warnings
+warnings.filterwarnings("ignore")
 
 GAME = 'raiden'  # the name of the game being played for log files
 CONFIG = 'nothreshold'
 ACTIONS = 9  # number of valid actions
 GAMMA = 0.99  # decay rate of past observations
-OBSERVATION = 3200.  # timesteps to observe before training
+OBSERVATION = 20000.  # timesteps to observe before training
 EXPLORE = 3000000.  # frames over which to anneal epsilon
 FINAL_EPSILON = 0.0001  # final value of epsilon
-INITIAL_EPSILON = 0.1  # starting value of epsilon
+INITIAL_EPSILON = 0.8  # starting value of epsilon
 REPLAY_MEMORY = 50000  # number of previous transitions to remember
 BATCH = 32  # size of minibatch
 FRAME_PER_ACTION = 1
 LEARNING_RATE = 1e-4
 SAVE_EVERY = 10000
 EPISODES = 100000000
-PRINT_EVERY = 1000
+PRINT_EVERY = 50
 
 img_rows, img_cols = 80, 80
 # Convert image into Black and white
@@ -72,7 +74,7 @@ def trainNetwork(model):
     # get the first state by doing nothing and preprocess the image to 80x80x4
     do_nothing = np.zeros([ACTIONS])
     do_nothing[8] = 0
-    x_t, r_0, terminal, hp, live = game_state.step(do_nothing)
+    x_t, r_0, terminal, score, hp, live = game_state.step(do_nothing)
 
     x_t = skimage.color.rgb2gray(x_t)
     x_t = skimage.transform.resize(x_t, (80, 80))
@@ -111,7 +113,7 @@ def trainNetwork(model):
             epsilon -= (INITIAL_EPSILON - FINAL_EPSILON) / EXPLORE
 
         # run the selected action and observed next state and reward
-        x_t1_colored, r_t, terminal, hp, live = game_state.step(a_t)
+        x_t1_colored, r_t, terminal, score, hp, live = game_state.step(a_t)
         if terminal:
             game_state.reset()
 
@@ -182,6 +184,7 @@ def trainNetwork(model):
                   "/ EPSILON", epsilon, \
                   "/ ACTION", action_index,
                   "/ REWARD", r_t, \
+                  "/ SCORE", score, \
                   "/ HP", hp, \
                   "/ Live", live, \
                   "/ Q_MAX ", np.max(Q_sa), \

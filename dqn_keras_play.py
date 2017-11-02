@@ -22,6 +22,7 @@ from raiden_env import *
 
 GAME = 'raiden'  # the name of the game being played for log files
 CONFIG = 'nothreshold'
+MODEL = 'model_v1.h5'
 ACTIONS = 9  # number of valid actions
 GAMMA = 0.99  # decay rate of past observations
 # OBSERVATION = 3200.  # timesteps to observe before training
@@ -73,7 +74,7 @@ def trainNetwork(model):
     # get the first state by doing nothing and preprocess the image to 80x80x4
     do_nothing = np.zeros([ACTIONS])
     do_nothing[8] = 0
-    x_t, r_0, terminal, hp, live = game_state.step(do_nothing)
+    x_t, r_0, terminal, score, hp, live = game_state.step(do_nothing)
 
     x_t = skimage.color.rgb2gray(x_t)
     x_t = skimage.transform.resize(x_t, (80, 80))
@@ -88,7 +89,7 @@ def trainNetwork(model):
     OBSERVE = 999999999  # We keep observe, never train
     epsilon = FINAL_EPSILON
     print("Now we load weight")
-    model.load_weights("model.h5")
+    model.load_weights(MODEL)
     adam = Adam(lr=LEARNING_RATE)
     model.compile(loss='mse', optimizer=adam)
     print("Weight load successfully")
@@ -118,7 +119,7 @@ def trainNetwork(model):
             epsilon -= (INITIAL_EPSILON - FINAL_EPSILON) / EXPLORE
 
         # run the selected action and observed next state and reward
-        x_t1_colored, r_t, terminal, hp, live = game_state.step(a_t)
+        x_t1_colored, r_t, terminal, score, hp, live = game_state.step(a_t)
         if terminal:
             break
 
@@ -143,6 +144,7 @@ def trainNetwork(model):
               "/ EPSILON", epsilon, \
               "/ ACTION", action_index,
               "/ REWARD", r_t, \
+              "/ SCORE" , score, \
               "/ HP", hp, \
               "/ Live", live, \
               "/ Q_MAX ", np.max(Q_sa), \
