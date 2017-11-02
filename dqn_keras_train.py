@@ -96,7 +96,7 @@ def trainNetwork(model):
         #choose an action epsilon greedy
         if t % FRAME_PER_ACTION == 0:
             if random.random() <= epsilon:
-                print("----------Random Action----------")
+                # print("----------Random Action----------")
                 action_index = random.randrange(ACTIONS)
                 a_t[action_index] = 1
             else:
