@@ -3,7 +3,7 @@ import random
 import math
 import numpy as np
 import os
-os.environ["SDL_VIDEODRIVER"] = "dummy"
+os.environ["SDL_VIDEODRIVER"] = "x11"
 # Global var
 SPEED = 60
 root = r'resource'

@@ -34,6 +34,7 @@ FRAME_PER_ACTION = 1
 LEARNING_RATE = 1e-4
 SAVE_EVERY = 10000
 EPISODES = 100000000
+PRINT_EVERY = 1000
 
 img_rows, img_cols = 80, 80
 # Convert image into Black and white
@@ -175,7 +176,7 @@ def trainNetwork(model):
             state = "explore"
         else:
             state = "train"
-        if t % 1000 == 0:
+        if t % PRINT_EVERY == 0:
             print("TIMESTEP", t, \
                   "/ STATE", state, \
                   "/ EPSILON", epsilon, \
