@@ -111,6 +111,8 @@ def trainNetwork(model):
 
         # run the selected action and observed next state and reward
         x_t1_colored, r_t, terminal, hp, live = game_state.step(a_t)
+        if terminal:
+            game_state.reset()
 
         x_t1 = skimage.color.rgb2gray(x_t1_colored)
         x_t1 = skimage.transform.resize(x_t1, (80, 80))
@@ -123,7 +125,6 @@ def trainNetwork(model):
         D.append((s_t, action_index, r_t, s_t1, terminal))
         if len(D) > REPLAY_MEMORY:
             D.popleft()
-
         # only train if done observing
         if t > OBSERVE:
             # sample a minibatch to train on
