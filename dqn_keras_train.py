@@ -130,7 +130,7 @@ def trainNetwork(model):
             minibatch = random.sample(D, BATCH)
 
             inputs = np.zeros((BATCH, s_t.shape[1], s_t.shape[2], s_t.shape[3]))  # 32, 80, 80, 4
-            print(inputs.shape)
+            # print(inputs.shape)
             targets = np.zeros((inputs.shape[0], ACTIONS))  # 32, 2
 
             # Now we do the experience replay
