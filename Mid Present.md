@@ -4,7 +4,7 @@
 
 We implemented our own DQN algorithm to train the raiden game for about 40,000 iterations.
 
-![Bad](resource/img_v0_bad.gif)
+![Bad](resource/img_v0_good.gif)
 
 The following advantages are observed:
 - Plane knows how to avoid the enemies to some extent
@@ -22,7 +22,7 @@ The following improvements are made based on the observations:
 ## Version 1
 We adjust the settings of the game and parameters of our algorithms. We train the new model for about 100,000 iterations.
 
-![V1](resource/img_v0_good.gif)
+![V1](resource/img_v0_good_2.gif)
 
 The following advantages are observed:
 - Plane shoots part of the enemies
