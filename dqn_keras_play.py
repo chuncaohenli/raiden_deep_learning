@@ -19,10 +19,14 @@ from keras.layers.convolutional import Convolution2D, MaxPooling2D
 from keras.optimizers import SGD, Adam
 import tensorflow as tf
 from raiden_env import *
+from scipy.misc import imsave
 
+IMG_PREFIX = 'img_'
+IMG_INDEX = 0
+IMG_SUFFIX = '.png'
 GAME = 'raiden'  # the name of the game being played for log files
 CONFIG = 'nothreshold'
-MODEL = 'model_v1.h5'
+MODEL = 'model.h5'
 ACTIONS = 9  # number of valid actions
 GAMMA = 0.99  # decay rate of past observations
 # OBSERVATION = 3200.  # timesteps to observe before training
@@ -120,6 +124,9 @@ def trainNetwork(model):
 
         # run the selected action and observed next state and reward
         x_t1_colored, r_t, terminal, score, hp, live = game_state.step(a_t)
+        global IMG_INDEX
+        imsave(IMG_PREFIX + str(IMG_INDEX) + IMG_SUFFIX, x_t1_colored)
+        IMG_INDEX += 1
         if terminal:
             break
 

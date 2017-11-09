@@ -221,7 +221,7 @@ class Enemy(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.x_offset = -6
         self.y_offset = -6
-        self.score = 10
+        self.score = 20
         self.turn = 3.1415926535898 * 50  # angle counter for circular path
         self.radius = 100
         self.hp = 0
@@ -597,15 +597,15 @@ class Raiden_Env():
         if time <= 1200:
             self.enemytype3()
         elif 1200 < time <= 2400:
-            self.enemytype6()
-        elif 2400 < time <= 3600:
             self.enemytype8()
-        elif 3600 < time <= 4800:
-            self.enemytower()
-        elif 4800 < time <= 6000:
+        elif 2400 < time <= 3600:
             self.enemytype7()
-        elif 6000 < time <= 7200:
+        elif 3600 < time <= 4800:
             self.enemytype5()
+        elif 4800 < time <= 6000:
+            self.enemytype6()
+        elif 6000 < time <= 7200:
+            self.enemytower()
         elif time == 7401:
             self.enemyboss1()
 
@@ -790,6 +790,7 @@ class Raiden_Env():
 
         for hitbox in bullet_hit_player1:
             player.hp -= 10
+            player.score -= 10
 
         # --- Player damage checking
         if player.hp <= 0:
@@ -800,8 +801,6 @@ class Raiden_Env():
 
         if player.live <= 0:
             game_end = True
-            player.live = 3
-            player.hp = 100
 
         # --- Blit screens
         # p_score = instrucfont.render('Score:' + str(player.score), 1, N_BLUE)
@@ -828,8 +827,8 @@ class Raiden_Env():
         # return screenshot, reward, terminated_signal
         # add reward for live
         reward = player.score - old_score
-        if not game_end:
-            reward += 0.1
+        if not game_end and reward == 0:
+            reward -= 1
         # if game_end:
         #     reward -= 100
         return pygame.surfarray.array3d(pygame.display.get_surface()), \

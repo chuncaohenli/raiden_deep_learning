@@ -22,21 +22,22 @@ from raiden_env import *
 import warnings
 warnings.filterwarnings("ignore")
 
+MODEL = 'model.h5'
 GAME = 'raiden'  # the name of the game being played for log files
 CONFIG = 'nothreshold'
 ACTIONS = 9  # number of valid actions
 GAMMA = 0.99  # decay rate of past observations
-OBSERVATION = 20000.  # timesteps to observe before training
-EXPLORE = 3000000.  # frames over which to anneal epsilon
+OBSERVATION = 5000.  # timesteps to observe before training
+EXPLORE = 2000000.  # frames over which to anneal epsilon
 FINAL_EPSILON = 0.0001  # final value of epsilon
-INITIAL_EPSILON = 0.8  # starting value of epsilon
+INITIAL_EPSILON = 0.3  # starting value of epsilon
 REPLAY_MEMORY = 50000  # number of previous transitions to remember
 BATCH = 32  # size of minibatch
 FRAME_PER_ACTION = 1
 LEARNING_RATE = 1e-4
 SAVE_EVERY = 10000
 EPISODES = 100000000
-PRINT_EVERY = 50
+PRINT_EVERY = 1
 
 img_rows, img_cols = 80, 80
 # Convert image into Black and white
@@ -90,6 +91,12 @@ def trainNetwork(model):
     epsilon = INITIAL_EPSILON
 
     t = 0
+    epsilon = 0
+    print("Now we load weight")
+    model.load_weights(MODEL)
+    adam = Adam(lr=LEARNING_RATE)
+    model.compile(loss='mse', optimizer=adam)
+    print("Weight load successfully")
     while (True):
         loss = 0
         Q_sa = 0
