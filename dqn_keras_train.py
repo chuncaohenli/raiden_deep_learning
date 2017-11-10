@@ -91,12 +91,12 @@ def trainNetwork(model):
     epsilon = INITIAL_EPSILON
 
     t = 0
-    epsilon = 0
-    print("Now we load weight")
-    model.load_weights(MODEL)
-    adam = Adam(lr=LEARNING_RATE)
-    model.compile(loss='mse', optimizer=adam)
-    print("Weight load successfully")
+#     epsilon = 0
+#     print("Now we load weight")
+#     model.load_weights(MODEL)
+#     adam = Adam(lr=LEARNING_RATE)
+#     model.compile(loss='mse', optimizer=adam)
+#     print("Weight load successfully")
     while (True):
         loss = 0
         Q_sa = 0
