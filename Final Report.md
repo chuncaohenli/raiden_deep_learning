@@ -1,5 +1,4 @@
 # Raiden Game AI - by ALPHARUN
-<br />
 
 ##DQN implementation
 
