@@ -1,6 +1,7 @@
 # Raiden Game AI - by ALPHARUN
+<br />
 
-##DQN implementation
+## DQN implementation
 
 ### 1. Version 0
 We implemented our own DQN algorithm to train the raiden game for about 40,000 iterations.
