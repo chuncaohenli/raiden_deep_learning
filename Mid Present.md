@@ -57,6 +57,57 @@ We find that the suicide type enemies are more difficult to deal with than other
 ## Technical issue
 1. Baseline integration
 
+   1.  Wrap Environment
+   
+        Made serveral changes to Raiden game code to implement gym environment APIs.
+    
+      * Reconstructed the project and implement a RaidenENV class with step, render and reset methods.
+    
+      * Changed code structure to split the render and computation parts.
+    
+      * Wrote setup and initial scripts to register the raiden environment.
+    
+   2. Algorithm Design 
+   
+    * Reward Strategy Design
+    
+      If the player's fighter stay alive for each time step, get a 0.001 reward.<br />
+      If it is crashed by enemies, get a negative reward of the hp of that enemy.<br />
+      If it shoot one enemy down, get a reward of the hp of that enemy.<br />
+      If it dies, get a 200 negative reward.<br />
+    
+    * Neural Network Design
+    
+      Made a convolution neural network:<br />
+      Conv layers: (32, 8, 4), (64, 4, 2), (64, 3, 1)<br />
+      Hidden layers: (256)
+    
+    * Hyperparameters Design
+    
+      gamma=1 (We set discount factor as 1 because future bonus is as important as current bonus)<br />
+      max_timesteps=300000<br />
+      exploration_fraction=0.6<br />
+      exploration_final_eps=0.05 (This is a little bit higher than usual because this game is last quite long, we want the agent to explore enough)<br />
+    
+   3. Training Optimizing
+   
+    * Reduce nosise
+    
+      Remove background image and other irrelevant things
+    
+    * Simplify input
+    
+      Compreesed the size of the image we captured.<br />
+      The orignal size is 700 * 900, after compressing it's 160 * 210 which reduced the computation in NN significantly.
+    
+    * FrameSkipping
+    
+      It's unnecssary to pass every image we captured to neural network every timestep. For each timestep, we repeat the same action for several times (random number), track the reward and coordinates of the fighter and only return the finnal result.
+    
+    * Split render and computation
+    
+      During training process, we don't render the screen and show the training process on the screen. Thus, we speed up the training process.
+
 2. Cloud server video service
     When we train our model in cloud services, the following errors will come
     ```sh
