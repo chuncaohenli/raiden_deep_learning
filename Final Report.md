@@ -63,12 +63,15 @@ The following issues are observed:
 
 We find that the suicide type enemies are more difficult to deal with than other types. As a result, we adjust the order of the enemies so that they comes in the order from the easiest to the most difficult one.
 
+### 4. Version 3
+We train the model on Google Cloud Platform for 500,000 iterations.
+
+The following advantages are observed:
+- Plane can deal perfectly with the suicide enemies. When suicide enemies appears, the plane will go back to a decent distance, which is the opitimal way with least motions to deal with the suicide type enemies. See below.
 <img src="resource/img_vf_good.gif" width="50%">
 
+- Plane can deal perfectly with the tower enemies. Note that in the following snapshot, the plane travel through the shortest path to shoot down the tower with only 20 hp loss, which is optimal in this senario.
 <img src="resource/img_vf_tower.gif" width="50%">
-
-### 4. Version 3
-We train the model on Google Cloud Platform.
 
 ### 5. Version 4
 More iterations.
