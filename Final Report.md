@@ -1,4 +1,3 @@
-<<<<<<< HEAD:Final Report.md
 # Raiden Game AI - by ALPHARUN
 <br />
 
@@ -291,4 +290,3 @@ it has several prons:
 - More robust
 - Better scores
 ### A3C performance
->>>>>>> 69bc11b662cc4613b6c3cddbb5ab3de5a0c51e74:Mid Present.md
