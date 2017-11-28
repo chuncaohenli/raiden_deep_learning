@@ -3,6 +3,9 @@ import random
 import math
 import numpy as np
 import os
+import skimage
+from skimage.transform import resize
+from skimage.color import rgb2gray
 # os.environ["SDL_VIDEODRIVER"] = "x11"
 # Global var
 SPEED = 60
@@ -831,7 +834,9 @@ class Raiden_Env():
             reward -= 1
         # if game_end:
         #     reward -= 100
-        return pygame.surfarray.array3d(pygame.display.get_surface()), \
+        x_t = self.get_preprocessed_frame(pygame.surfarray.array3d(pygame.display.get_surface()))
+        s_t = np.stack((x_t, x_t, x_t, x_t), axis=0)
+        return s_t, \
                reward/100.0, \
                game_end, \
                player.score, \
@@ -870,3 +875,21 @@ class Raiden_Env():
         instrucfont = pygame.font.SysFont('freesansbold.ttf', 50)
         time = 0
         bgtime = 0
+
+    def get_preprocessed_frame(self, observation):
+        """
+        See Methods->Preprocessing in Mnih et al.
+        1) Get image grayscale
+        2) Rescale image
+        """
+        return resize(rgb2gray(observation), (84, 84))
+
+    def get_initial_state(self):
+        self.reset()
+        do_nothing = np.zeros([ACTIONS])
+        do_nothing[8] = 0
+        x_t, r_0, terminal, score, hp, live = self.step(do_nothing)
+        x_t = self.get_preprocessed_frame(x_t)
+        s_t = np.stack((x_t, x_t, x_t, x_t), axis=0)
+        # s_t = s_t.reshape(1, s_t.shape[0], s_t.shape[1], s_t.shape[2])  # 1*80*80*4
+        return s_t
