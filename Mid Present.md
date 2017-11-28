@@ -119,3 +119,14 @@ We find that the suicide type enemies are more difficult to deal with than other
 
 - Improve the DQN. Change the settings of the game so that the enemies will appear in a random initail point instead of a fixed point now. Moreover we could add noise on the movements of enemies to see if DQN could be stable and perform well.
 - Implement A3C and PPO
+
+## A3C implementation
+We implemented A3C algorithm to train our agent for game Raiden. 
+### Why A3C
+DQN algorithm is very time-consuming. Using my own laptop to train the model for 10 hours will only finish about 40,000 iterations. So in order to find a more efficient algorithm, we find A3C, which is a improvement version of actor critic algorithm. Compared with other DQN algorithms,
+it has several prons:
+- Faster
+- Simpler
+- More robust
+- Better scores
+### A3C performance
