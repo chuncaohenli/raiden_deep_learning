@@ -79,8 +79,8 @@ More iterations.
 | Model_v0 | 2180   | 40,000     | Performs bad. Avoid enemies, but get stuck. |
 | Model_v1 | 1420   | 100,000    | Modify the game. Shoot enemies, but keep crashing. |
 | Model_v2 | 640    | 100,000    | Modify the rewards. Clear first type enemies, but cannot deal with the suicide type enemies. |
-| Model_v3 | 4610   | ???        | More iterations. Can get a high score, but gets dead before the boss enemy occurs. |
-| Model_v4 |  ???   | ???        | Final model. Performs well. |
+| Model_v3 | 4610   | 500,000    | More iterations. Can get a high score, but gets dead before the boss enemy occurs. |
+| Model_v4 | 5730   | 1,500,000  | Final model. Performs well. |
 
 ## A3C implementation
 We implemented A3C algorithm to train our agent for game Raiden. 
@@ -208,9 +208,10 @@ it has several prons:
       During training process, we don't render the screen and show the training process on the screen. Thus, we speed up the training process.
 
 ### Cloud server video service
-    When we train our model in cloud services, the following errors will come
-    ```sh
-    pygame.error: No available video device
-    ```
-    Set the video device to "dummy" will cause the loss function to be NAN, which     raises a problem in training. 
-    We solved the method by setting VNC port in Google cloud and run our         algorithms via a VNC client server connected to the cloud service.
+    
+When we train our model in cloud services, the following errors will come
+```sh
+pygame.error: No available video device
+```
+Set the video device to "dummy" will cause the loss function to be NAN, which raises a problem in training. 
+We solved the method by setting VNC port in Google cloud and run our algorithms via a VNC client server connected to the cloud service.
