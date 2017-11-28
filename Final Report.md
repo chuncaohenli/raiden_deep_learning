@@ -82,17 +82,8 @@ it has several prons:
 - Better scores
 ### 2. A3C performance
 
-## OpenAI Baselines
-
+## Baselines Version
 ### 1. DQN
-
-
-### 2. PPO
-
-
-## Technical issues
-### Baseline integration
-
    1.  Wrap Environment
    
         Made serveral changes to Raiden game code to implement gym environment APIs.
@@ -143,6 +134,15 @@ it has several prons:
     * Split render and computation
     
       During training process, we don't render the screen and show the training process on the screen. Thus, we speed up the training process.
+   4. Results
+   
+        After training for 300000 timesteps, the agent can play the game for about 1 minute. It knows how to avoid crashing with enemies. But it always stay in a small area and can not find the best way to shoot the enemy to get a higher score.
+      //todo gif image
+
+### 2. PPO
+
+
+## Technical issues
 
 ### Cloud server video service
     When we train our model in cloud services, the following errors will come
