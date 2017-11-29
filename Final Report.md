@@ -73,10 +73,23 @@ The following advantages are observed:
 - Plane can deal perfectly with the tower enemies. Note that in the following snapshot, the plane travel through the shortest path to shoot down the tower with only 20 hp loss, which is optimal in this senario.
 <img src="resource/img_vf_tower.gif" width="50%">
 
-### 5. Version 4
-More iterations.
+The following issues are observed:
+- Plane will sometimes stay at the corner instead of going around to shoot down enemies. To encourage the plane to be active, we change the reward of survival from 0.1 to -0.1 each frame in the next version.
 
-### 6. All DQN versions' results
+### 5. Version 4
+We train the model on Google Cloud Platform for about 1,500,000 iterations. This is the final model of our own-implemented dqn algorithms. It performs pretty well, winning a score of 5730 at maximum and over 5000 in average. During the play, the plane knows how to avoid the enemies and shoot the enemies at the safest place. The following senario is an improvement from the version 4. 
+
+<img src="resource/img_chuji.gif" width="50%">
+In above snapshots, the plane will quickly go out to shoot down the yellow enemies and then quickly go back to the safe place so that it will not crash the following enemies. Though it will not attack the blue enemies actively, this strategy is already optimal in a local sense. We believe is we adjust the replay memory to a larger size, the plane will perform more actively.
+
+Compared with the version 4 performance in the following scenario, it is a quite decent improvement which increases about 1000 credits during the play.
+
+<img src="resource/img_stay_top.gif" width="50%">
+
+### 6. Future work
+- Defeat the final boss. Note that usually the final boss appears at the end, which is hardly seen during training. We have a plan to train a seperate network for the final boss and rare enemies.
+
+### 7. All DQN versions' results
 | Versions | Scores | Iterations | Description |
 |:-------- |:------:|:----------:|:----------- |
 | Model_v0 | 2180   | 40,000     | Performs bad. Avoid enemies, but get stuck. |
