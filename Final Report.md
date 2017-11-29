@@ -176,8 +176,19 @@ it has several prons:
       //todo gif image
 
 ### 2. PPO
-
-
+  1. In order to improve the profermance, we have tried PPO algorithm in baselines. PPO (Proximal Policy Optimization) is proposed by Openai just a few months ago. It becomes the default reinforce learning algorithm of openai now.
+  
+  2. Hyperparameters
+    
+    max_timessteps = 1000000
+    gamma = 1
+    lam=0.o95
+    optim_stepsize=1e-3
+    clip_param=0.2
+    entcoeff=0.01
+        
+  3. Results
+      
 ## Technical issues
 ### Baseline integration
 
