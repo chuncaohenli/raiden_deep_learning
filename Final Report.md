@@ -61,6 +61,12 @@ The following advantages are observed:
 The following issues are observed:
 - Plane cannot deal with the suicide type enemies
 
+<img src="resource/img_suicide_bad.gif" width="50%">
+
+- Plane cannot deal with the tower type enemies
+
+<img src="resource/img_tower_bad.gif" width="50%">
+
 We find that the suicide type enemies are more difficult to deal with than other types. As a result, we adjust the order of the enemies so that they comes in the order from the easiest to the most difficult one.
 
 ### 4. Version 3
@@ -71,7 +77,10 @@ The following advantages are observed:
 <img src="resource/img_vf_good.gif" width="50%">
 
 - Plane can deal perfectly with the tower enemies. Note that in the following snapshot, the plane travel through the shortest path to shoot down the tower with only 20 hp loss, which is optimal in this senario.
+
 <img src="resource/img_vf_tower.gif" width="50%">
+
+<img src="resource/img_tower_good.gif" width="50%">
 
 The following issues are observed:
 - Plane will sometimes stay at the corner instead of going around to shoot down enemies. To encourage the plane to be active, we change the reward of survival from 0.1 to -0.1 each frame in the next version.
