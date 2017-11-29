@@ -117,6 +117,16 @@ it has several prons:
 - More robust
 - Better scores
 ### 2. A3C performance
+#### Converge faster
+It will converge in less than half million iterations.
+<img src="resource/actor.png" width="50%">
+<img src="resource/critic.png" width="50%">
+#### Not bad performance
+The performance improves fast.
+<img src="resource/a3c_perf1.png" width="50%">
+The performance is close to DQN after just 24h training.
+<img src="resource/a3c_perf2.png" width="50%">
+
 
 ## Baselines Version
 ### 1. DQN
