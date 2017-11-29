@@ -127,6 +127,7 @@ It will converge in less than half million iterations.
 #### Not bad performance
 - The performance improves fast.
 <img src="resource/a3c_perf1.png" width="50%">
+
 - The performance is close to DQN after just 24h training.
 <img src="resource/a3c_perf2.png" width="50%">
 
