@@ -173,7 +173,7 @@ it has several prons:
    4. Results
    
         After training for 300000 timesteps, the agent can play the game for about 1 minute. It knows how to avoid crashing with enemies. But it always stay in a small area and can not find the best way to shoot the enemy to get a higher score.
-      //todo gif image
+        
 
 ### 2. PPO
   1. In order to improve the profermance, we have tried PPO algorithm in baselines. PPO (Proximal Policy Optimization) is proposed by Openai just a few months ago. It becomes the default reinforce learning algorithm of openai now.
@@ -188,7 +188,8 @@ it has several prons:
     entcoeff=0.01
         
   3. Results
-      
+  <img src="resource/DQN_baseline.gif" width="50%">
+  <img src="resource/DQN_baseline2.gif" width="50%">
 ## Technical issues
 ### Baseline integration
 
