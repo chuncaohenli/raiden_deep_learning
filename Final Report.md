@@ -123,6 +123,7 @@ It will converge in less than half million iterations.
 <img src="resource/actor.png" width="50%">
 - The graph for critic
 <img src="resource/critic.png" width="50%">
+
 #### Not bad performance
 - The performance improves fast.
 <img src="resource/a3c_perf1.png" width="50%">
