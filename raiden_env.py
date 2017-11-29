@@ -595,13 +595,13 @@ class Raiden_Env():
             bgtime = 0
         # --- Level 1 process
         if time <= 1200:
-            self.enemytype3()
+            self.enemytype6()
         elif 1200 < time <= 2400:
-            self.enemytype8()
+            self.enemytype6()
         elif 2400 < time <= 3600:
-            self.enemytype7()
+            self.enemytype6()
         elif 3600 < time <= 4800:
-            self.enemytype5()
+            self.enemytype6()
         elif 4800 < time <= 6000:
             self.enemytype6()
         elif 6000 < time <= 7200:
